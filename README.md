@@ -9,9 +9,9 @@ These timings have been gathered crudely using aligned timestamps across VMs, no
 
 ### Scenario 1 - primary to secondary failover
 
-Failover time: near instant <100ms
-Start time: 2022-01-17T11:20:16,518584729
-End (next request): 2022-01-17T11:20:16,613700879+00:00
+Failover time: near instant <100ms easily  
+Start time: `2022-01-17T11:20:16,518584729`  
+End (next request): `2022-01-17T11:20:16,613700879+00:00`  
 
 Client
 ```
@@ -34,9 +34,9 @@ Received 0 response(s)
 ```
 
 ### Scenario 2 - secondary to primary recovery
-Failover time: near instant 
-Start: 2022-01-17T11:27:44,937742057
-End (next request): 2022-01-17T11:27:45,045511629
+Failover time: near instant <100ms easily  
+Start: `2022-01-17T11:27:44,937742057`  
+End (next request): `2022-01-17T11:27:45,045511629`  
 
 Client
 ```
