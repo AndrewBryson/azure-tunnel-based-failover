@@ -1,7 +1,16 @@
 # Purpose
 
-This is a trial of encapsulation options in Azure to solve the problem of achieving fast failover of a HA pair of servers running in an active/passive configuration.  The failover uses gratuitous ARP to move a VIP across the instances.
+This is a trial of networking encapsulation ([VXLAN](https://en.wikipedia.org/wiki/Virtual_Extensible_LAN), [GENEVE](https://en.wikipedia.org/wiki/Generic_Network_Virtualization_Encapsulation))  in Azure to solve the problem of achieving fast failover (~20ms) of a HA pair of servers running in an active/passive configuration.  The failover uses gratuitous ARP to move a VIP across the instances, therefore requiring control of MAC addresses (layer 2), a capability not available in Azure/public cloud networks.  This repository uses a simple HTTP client & server with a VIP to simulate a real workload.
 
+A range of other failover options are available, see [Deploy highly available NVAs](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/dmz/nva-ha#ha-architectures-overview) specifically:
+1. [Azure Load Balancer](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/dmz/nva-ha#load-balancer-design)
+1. [Azure Route Server](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/dmz/nva-ha#azure-route-server)
+1. [Gateway Load Balancer](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/dmz/nva-ha#gateway-load-balancer)
+1. [Changing PIP-UDR](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/dmz/nva-ha#changing-pip-udr)
+
+These options do not meet a fast failover requirement of <100ms.
+
+## Solution Overview
 ![Overview diagram](/images/azure-tunnel-based-failover.png)
 
 # Timings
