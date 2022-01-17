@@ -145,6 +145,20 @@ TCP window size:  128 KByte (default)
 [  4]  0.0-10.0 sec  1.05 GBytes   895 Mbits/sec
 ```
 
+### VM Size Performance Summary
+| VM type/Size | VXLAN bandwidth | Max NIC bandwidth |
+|--------------|-----------|-----------|
+| D2s_v3 | 898 Mbits/sec | 1000 Mbit |
+| D4s_v3 | 1.78 Gbits/sec | 2000 Mbit |
+| D8s_v3 | 3.69 Gbits/sec | 4000 Mbit |
+| D16s_v3 | 7.36 Gbits/sec | 8000 Mbit |
+| D32s_v3 | 9.46 Gbits/sec | 16000 Mbit |
+
+- All NICs have accelerated networking enabled.  
+- Bandwidth scaling looks linear with vCPU as expected.
+- No tuning has taking place at all.
+- OS is Ubuntu 20.
+
 # Configuration
 
 ## Web app creation
