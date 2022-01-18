@@ -152,12 +152,40 @@ TCP window size:  128 KByte (default)
 | D4s_v3 | 1.78 Gbits/sec | 2000 Mbit |
 | D8s_v3 | 3.69 Gbits/sec | 4000 Mbit |
 | D16s_v3 | 7.36 Gbits/sec | 8000 Mbit |
-| D32s_v3 | 9.46 Gbits/sec | 16000 Mbit |
+| D32s_v3 - 1 iPerf thread | 9.46 Gbits/sec | 16000 Mbit |
+| D32s_v3 - 2 iPerf threads | 14.7 Gbits/sec | 16000 Mbit |
 
 - All NICs have accelerated networking enabled.  
-- Bandwidth scaling looks linear with vCPU as expected.
+- Bandwidth scaling looks linear with vCPU as expected, until 32 vCPUs...
 - No tuning has taking place at all.
-- OS is Ubuntu 20.
+- OS is `Ubuntu 20_04-lts-gen2`
+
+### 32 vCPUs and iPerf Client Threads
+- 1 client thread - 9.17Gbits/sec:
+```
+$ iperf --client 192.168.0.200 --parallel 1 --time 60
+------------------------------------------------------------
+Client connecting to 192.168.0.200, TCP port 5001
+TCP window size: 1020 KByte (default)
+------------------------------------------------------------
+[  3] local 192.168.0.4 port 53928 connected with 192.168.0.200 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-60.0 sec  64.0 GBytes  9.17 Gbits/sec
+```
+- 2 client threads - 14.5Gbit/sec:
+```
+$ iperf --client 192.168.0.200 --parallel 2 --time 60
+------------------------------------------------------------
+Client connecting to 192.168.0.200, TCP port 5001
+TCP window size: 1.10 MByte (default)
+------------------------------------------------------------
+[  3] local 192.168.0.4 port 54380 connected with 192.168.0.200 port 5001
+[  4] local 192.168.0.4 port 54382 connected with 192.168.0.200 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0-60.0 sec  47.2 GBytes  6.76 Gbits/sec
+[  4]  0.0-60.0 sec  54.2 GBytes  7.76 Gbits/sec
+[SUM]  0.0-60.0 sec   101 GBytes  14.5 Gbits/sec
+```
 
 # Configuration
 
